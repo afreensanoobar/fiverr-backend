@@ -1,31 +1,28 @@
-// const express = require("express")
-// const app = express()
 import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 
 dotenv.config()
-
 const app = express()
 
-mongoose.set("strictQuery", true)
+app.use(express.json())
 
-const connect = async () => {
+const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL)
-    console.log("✅ Connected to MongoDB")
+    console.log("MongoDB Connected Successfully")
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err.message)
+    console.error("MongoDB Connection Failed:", err.message)
   }
 }
 
-// 👇 VERY IMPORTANT
-connect()
+connectDB()
 
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀")
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running on port ${process.env.PORT || 3000}`)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
