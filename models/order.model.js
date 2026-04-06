@@ -10,7 +10,18 @@ const OrderSchema = new Schema(
     img: {
       type: String,
       required: false,
-    },d: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    sellerId: {
+      type: String,
+      required: true,
     },
     buyerId: {
       type: String,
